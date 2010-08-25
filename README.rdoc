@@ -8,7 +8,7 @@ There are lots of options that can be set. If no options are given, the default 
 
 Here are some other ways to configure the plugin in moonshine.yml:
   
-    :astrails:
+    :astrails_safe:
       :local:
         :path: /home/user/bak # default is /home/rails/backup/:kind (mysqldump, archive)
       :cron:  # default is to run every night at midnight
