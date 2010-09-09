@@ -33,7 +33,7 @@ module AstrailsSafe
    unless options[:cron] == false
      options[:cron] ||= {}
      cron 'astrails-safe',
-      :command    => 'astrails-safe /etc/astrails/safe.conf',
+      :command    => options[:cron][:command] || 'astrails-safe /etc/astrails/safe.conf',
       :minute     => options[:cron][:minute] || 0,
       :hour       => options[:cron][:hour] || 0,
       :monthday   => options[:cron][:monthday] || '*',
