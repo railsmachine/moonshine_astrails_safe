@@ -40,7 +40,8 @@ Here are some other ways to configure the plugin in moonshine.yml:
 
 === Instructions
 
-* <tt>script/plugin install git://github.com/railsmachine/moonshine_astrails_safe.git</tt>
+* Install the plugin
+    script/plugin install git://github.com/railsmachine/moonshine_astrails_safe.git
 * Configure settings if needed
 * Include the plugin and recipe(s) in your Moonshine manifest
     recipe :astrails_safe
