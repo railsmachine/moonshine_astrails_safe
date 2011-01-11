@@ -1,20 +1,16 @@
 require File.join(File.dirname(__FILE__), 'spec_helper.rb')
 
-class AstrailsSafeManifest < Moonshine::Manifest::Rails
-  plugin :astrails_safe
+class AstrailsSafeManifest < Moonshine::Manifest
+  include Moonshine::AstrailsSafe
+  configure :user => 'rails'
 end
 
 describe "A manifest with the AstrailsSafe plugin" do
   
-  before do
-    @manifest = AstrailsSafeManifest.new
-    @manifest.configuration[:application] = "foo"
-    @manifest.configuration[:database] = {:adapter => 'mysql', :database => 'foo_prod'}
-  end
-    
   describe "with default options" do
   
     before do
+      @manifest = AstrailsSafeManifest.new
       @manifest.astrails_safe
     end
   
@@ -47,6 +43,9 @@ describe "A manifest with the AstrailsSafe plugin" do
   
   describe "specifying databases to back up" do
     before do
+      @manifest = AstrailsSafeManifest.new
+      @manifest.configuration[:application] = "foo"
+      @manifest.configuration[:database] = {:adapter => 'mysql', :database => 'foo_prod'}
       @databases = %w[foo_prod other_db one_more]
       @manifest.astrails_safe(:databases => @databases)
     end
@@ -60,6 +59,9 @@ describe "A manifest with the AstrailsSafe plugin" do
   
   describe "specifying paths to be archived" do
     before do
+      @manifest = AstrailsSafeManifest.new
+      @manifest.configuration[:application] = "foo"
+      @manifest.configuration[:database] = {:adapter => 'mysql', :database => 'foo_prod'}
       @manifest.astrails_safe(:archives => [
         {:name => 'site', :files => '/var/www'},
         {:name => 'app', :files => '/srv'}
@@ -77,6 +79,9 @@ describe "A manifest with the AstrailsSafe plugin" do
     
   describe "specifying a time to run astrails in cron" do
     before do
+      @manifest = AstrailsSafeManifest.new
+      @manifest.configuration[:application] = "foo"
+      @manifest.configuration[:database] = {:adapter => 'mysql', :database => 'foo_prod'}
       @manifest.astrails_safe(:cron => {:monthday => 1})
     end
     
@@ -92,13 +97,16 @@ describe "A manifest with the AstrailsSafe plugin" do
   
   describe "setting s3 credentials" do
     before do
+      @manifest = AstrailsSafeManifest.new
+      @manifest.configuration[:application] = "foo"
+      @manifest.configuration[:database] = {:adapter => 'mysql', :database => 'foo_prod'}
       @manifest.astrails_safe(:s3 => {:key => 's3key', :secret => 's3secret'})
     end
     
     it "should configure s3" do
       @manifest.files['/etc/astrails/safe.conf'].should_match /s3 do/
       @manifest.files['/etc/astrails/safe.conf'].should_match /key "s3key"/
-        @manifest.files['/etc/astrails/safe.conf'].should_match /secret "s3secret"/
+      @manifest.files['/etc/astrails/safe.conf'].should_match /secret "s3secret"/
     end
     
   end
