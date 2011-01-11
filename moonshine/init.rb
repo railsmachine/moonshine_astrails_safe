@@ -1,3 +1,5 @@
-require "#{File.dirname(__FILE__)}/../lib/astrails_safe.rb"
+require 'pathname'
+$LOAD_PATH.unshift Pathname.new(__FILE__).dirname.join('..', 'lib').expand_path
+require "moonshine/astrails_safe"
 
-include AstrailsSafe
+include Moonshine::AstrailsSafe
