@@ -10,8 +10,9 @@ end
 desc 'Default: specs'
 task :default => :spec
 
-require 'spec/rake/spectask'
+require 'rspec/core/rake_task'
 desc "Run all specs in spec directory (excluding plugin specs)"
-Spec::Rake::SpecTask.new do |t|
-  t.spec_files = FileList['spec/**/*_spec.rb']
+RSpec::Core::RakeTask.new do |t|
+  t.pattern = 'spec/**/*_spec.rb'
+  t.rspec_opts = ['--backtrace']
 end
