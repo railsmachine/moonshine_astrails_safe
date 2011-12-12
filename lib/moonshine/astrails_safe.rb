@@ -1,5 +1,8 @@
 module Moonshine
   module AstrailsSafe
+    def astrails_safe_template_dir
+      Pathname.new(__FILE__).dirname.join('astrails_safe', 'templates')
+    end
 
     # Define options for this plugin via the <tt>configure</tt> method
     # in your application manifest:
@@ -17,19 +20,16 @@ module Moonshine
       options[:local]   ||= {}
       options[:mysql]   ||= {}
       options[:mongodb] ||= {}
-    
-      # define the recipe
-      # options specified with the configure method will be 
-      # automatically available here in the options hash.
-      #    options[:foo]   # => true
-      gem 'astrails-safe'
+      options[:gem] ||= {}
+      gem 'astrails-safe', options[:gem]
       package 'gpg'
 
       file '/etc/astrails', :ensure => :directory, :mode => '644'
       file '/etc/astrails/safe.conf',
+        :ensure => :present,
         :mode => '644',
         :require => file('/etc/astrails'),
-        :content => template(File.join(File.dirname(__FILE__), 'astrails_safe', 'templates', 'safe.conf'), binding)
+        :content => template(astrails_safe_template_dir.join('safe.conf'), binding)
 
      # unless cron is  false, the default backup is every night at midnight
      unless options[:cron] == false
