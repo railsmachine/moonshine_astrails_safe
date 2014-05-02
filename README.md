@@ -1,8 +1,8 @@
-= Moonshine_AstrailsSafe
+# Moonshine_AstrailsSafe
 
-=== A plugin for Moonshine[http://github.com/railsmachine/moonshine]
+### A plugin for [Moonshine](http://github.com/railsmachine/moonshine)
 
-A plugin for installing and managing astrails-safe[http://github.com/astrails/safe], a tool for backing up files and databases locally and to s3.
+A plugin for installing and managing [astrails-safe](http://github.com/astrails/safe), a tool for backing up files and databases locally and to s3.
 
 There are lots of options that can be set. If no options are given, the default behavior is to backup the application's @deploy_to@ directory to /backup every night at midnight.
 
@@ -18,7 +18,7 @@ Here are some other ways to configure the plugin in moonshine.yml:
         :s3: 12
         :local: 3
       :gpg:
-        :key: user@domain.com # public key to encrypt with. quick instructions in the astrails readme[http://github.com/astrails/safe]
+        :key: user@domain.com # public key to encrypt with. quick instructions in the astrails [readme](http://github.com/astrails/safe)
         :password: sekrit # symmetric encryption with a password instead of a public key
       :mysql: # default is to backup the database from database.yml as root, no password
         :databases:
@@ -45,3 +45,7 @@ Here are some other ways to configure the plugin in moonshine.yml:
 * Configure settings if needed
 * Include the plugin and recipe(s) in your Moonshine manifest
     recipe :astrails_safe
+    
+***
+
+Unless otherwise specified, all content copyright &copy; 2014, [Rails Machine, LLC](http://railsmachine.com)
